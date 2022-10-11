@@ -1,0 +1,44 @@
+const { expect } = require('chai');
+const sinon = require('sinon');
+
+const connection = require('../../../src/models/connection');
+const productModel = require('../../../src/models/productModels');
+
+const { produtsDB, productId } = require('./productsMock');
+
+describe('Testes unitários da pasta models', function () {
+  it('Teste se retorna todos os produtos', async function () {
+    const output = [
+      {
+        "id": 1,
+        "name": "Martelo de Thor"
+      },
+      {
+        "id": 2,
+        "name": "Traje de encolhimento"
+      },
+      {
+        "id": 3,
+        "name": "Escudo do Capitão América"
+      }
+    ];
+    sinon.stub(connection, 'execute').resolves(produtsDB);
+
+    const result = await productModel.findAllModel();
+
+    expect(result).to.deep.equal(output);
+  });
+
+  it('Teste retorno a partir do id', async function () {
+    const output = {
+      id: 1,
+      name: 'Martelo de Thor',
+    }
+    sinon.stub(connection, 'execute').resolves(productId);
+
+    const result = await productModel.findByIdModel(1);
+    expect(result).to.deep.equal(output);
+  })
+
+  afterEach(sinon.restore);
+});
