@@ -1,9 +1,9 @@
 const express = require('express');
-const productsDB = require('../models/productModels')
+const productsDB = require('../models/productModels');
 
 const router = express.Router();
 
-router.get('/', async function (_req, res) {
+router.get('/', async (_req, res) => {
   try {
     const [result] = await productsDB.findAll();
     res.status(200).json(result);
@@ -12,7 +12,7 @@ router.get('/', async function (_req, res) {
   }
 });
 
-router.get('/:id', async function (req, res) {
+router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const [[result]] = await productsDB.findById(id);
