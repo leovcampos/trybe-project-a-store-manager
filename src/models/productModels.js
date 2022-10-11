@@ -1,11 +1,10 @@
 const conn = require('./connection');
 
-const findAllModel = () => conn.execute(
-  `SELECT * FROM StoreManager.products
-  ORDER BY id DESC;`,
+const findAllModel = async () => conn.execute(
+  'SELECT * FROM StoreManager.products ORDER BY id;'
 );
 
-const findByIdModel = (id) => conn.execute(
+const findByIdModel = async (id) => conn.execute(
   `SELECT * FROM StoreManager.products
   WHERE id = ?
   ORDER BY id;`,

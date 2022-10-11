@@ -5,8 +5,8 @@ const findAllService = async () => {
   return result;
 };
 
-const findByIdService = async () => {
-  const [[result]] = await productsModel.findByIdModel();
+const findByIdService = async (id) => {
+  const [[result]] = await productsModel.findByIdModel(id);
   return result;
 };
 
