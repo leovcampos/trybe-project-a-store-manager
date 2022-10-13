@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const connection = require('../../../src/models/connection');
 const productModel = require('../../../src/models/productModels');
 
-const { produtsDB, productId } = require('./productsMock');
+const { productsDB, productId } = require('../../mocks/productsMock');
 
 describe('Testes unitários da pasta models', function () {
   it('Teste se retorna todos os produtos', async function () {
@@ -22,7 +22,7 @@ describe('Testes unitários da pasta models', function () {
         "name": "Escudo do Capitão América"
       }
     ];
-    sinon.stub(connection, 'execute').resolves(produtsDB);
+    sinon.stub(connection, 'execute').resolves(productsDB);
 
     const result = await productModel.findAllModel();
 

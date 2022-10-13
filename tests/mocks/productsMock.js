@@ -1,4 +1,4 @@
-const produtsDB = [
+const productsDB = [
   {
     "id": 1,
     "name": "Martelo de Thor"
@@ -19,6 +19,6 @@ const productId = {
 };
 
 module.exports = {
-  produtsDB,
+  productsDB,
   productId,
 };
