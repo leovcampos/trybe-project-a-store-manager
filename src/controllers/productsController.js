@@ -10,7 +10,7 @@ const findByIdController = async (req, res) => {
   const result = await productsService.findByIdService(id);
 
   if (result) {
-    return res.status(200).json(result);
+    return res.status(200).send(result);
   }
 
   res.status(404).json({ message: 'Product not found' });
