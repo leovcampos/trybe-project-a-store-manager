@@ -16,7 +16,15 @@ const findByIdController = async (req, res) => {
   res.status(404).json({ message: 'Product not found' });
 };
 
+const insertProductController = async (req, res) => {
+  const { name } = req.body;
+  const result = await productsService.insertProductService(name);
+
+  res.status(201).json(result);
+};
+
 module.exports = {
   findAllController,
   findByIdController,
+  insertProductController,
 };
