@@ -1,4 +1,4 @@
-const validadeProduct = (req, res, next) => {
+const validateProduct = (req, res, next) => {
   const { name } = req.body;
 
   if (!name) {
@@ -12,4 +12,4 @@ const validadeProduct = (req, res, next) => {
   next();
 };
 
-module.exports = validadeProduct;
+module.exports = validateProduct;
