@@ -32,9 +32,18 @@ const updateProductController = async (req, res) => {
   res.status(statusCode).json(message);
 };
 
+const deleteProductController = async (req, res) => {
+  const { id } = req.params;
+
+  const { statusCode, message } = await productsService.deleteProductService(id);
+
+  res.status(statusCode).json(message);
+};
+
 module.exports = {
   findAllController,
   findByIdController,
   insertProductController,
   updateProductController,
+  deleteProductController,
 };

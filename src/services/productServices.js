@@ -37,9 +37,31 @@ const updateProductService = async (id, name) => {
   };
 };
 
+const deleteProductService = async (id) => {
+  const product = await findByIdService(id);
+  if (!product) {
+    return {
+      statusCode: 404,
+      message: {
+        message: 'Product not found',
+      },
+    };
+  }
+
+  await productsModel.deleteProductModel(id);
+
+  return {
+    statusCode: 204,
+    message: {
+      deletedProduct: product,
+    },
+  };
+};
+
 module.exports = {
   findAllService,
   findByIdService,
   insertProductService,
   updateProductService,
+  deleteProductService,
 };
