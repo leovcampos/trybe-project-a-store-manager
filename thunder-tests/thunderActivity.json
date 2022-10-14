@@ -50,14 +50,9 @@
     "method": "GET",
     "sortNum": 0,
     "created": "2022-10-11T20:15:00.300Z",
-    "modified": "2022-10-14T17:57:02.932Z",
+    "modified": "2022-10-14T18:37:54.313Z",
     "headers": [],
     "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"name\": \"produtoX\"\n}",
-      "form": []
-    },
     "tests": []
   },
   {

@@ -15,8 +15,32 @@ const insertProductService = async (productName) => {
   return newProduct;
 };
 
+const updateProductService = async (id, name) => {
+  const product = productsModel.findByIdModel(id);
+
+  if (!product) {
+    return {
+      statusCode: 404,
+      message: {
+        message: 'Product not found',
+      },
+    };  
+  }
+
+  await productsModel.updateProductModel(id, name);
+
+  return {
+    statusCode: 200,
+    message: {
+      id,
+      name,
+    },
+  };
+};
+
 module.exports = {
   findAllService,
   findByIdService,
   insertProductService,
+  updateProductService,
 };
