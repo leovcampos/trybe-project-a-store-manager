@@ -68,5 +68,60 @@ describe('Testes unitários da pasta controllers', function () {
     expect(res.json).to.have.been.calledWith(productId);
   });
 
+  it('Teste se um produto é atualizado', async function () {
+    const res = {};
+    const req = {
+      params: {
+        id: 1,
+      },
+      body: {
+        name: 'Martelo de Thor',
+      },
+    };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon.stub(productServices, 'updateProductService').resolves({
+      statusCode: 200,
+      message: {
+        id: 1,
+        name: 'Teia do Aranha'
+      }
+    });
+
+    await productControllers.updateProductController(req, res);
+
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith({
+      id: 1,
+      name: 'Teia do Aranha'
+    });
+  });
+
+  it('Teste se um produto é deletado', async function () {
+    const res = {};
+    const req = {
+      params: {
+        id: 1,
+      },
+    };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon.stub(productServices, 'deleteProductService').resolves({
+      statusCode: 204,
+      message: {
+        deletedProduct: productId,
+      },
+    });
+
+    await productControllers.deleteProductController(req, res);
+
+    expect(res.status).to.have.been.calledWith(204);
+    expect(res.json).to.have.been.calledWith({
+      deletedProduct: productId,
+    });
+  });
+
   afterEach(sinon.restore);
 });
