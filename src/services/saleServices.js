@@ -1,12 +1,12 @@
 const saleModels = require('../models/salesModels');
 
 const findAllSaleService = async () => {
-  const allSales = await saleModels.findAllSalesModel();
+  const [allSales] = await saleModels.findAllSalesModel();
   return allSales;
 };
 
 const findByIdSaleService = async (id) => {
-  const sale = await saleModels.findByIdSaleModel(id);
+  const [[sale]] = await saleModels.findByIdSaleModel(id);
 
   if (sale.length > 0) {
     return {
