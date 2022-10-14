@@ -55,5 +55,21 @@ describe('Testes unitários da pasta models', function () {
     expect(result).to.deep.equal(output);
   });
 
+  it('Teste se atualiza um produto', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+
+    const result = await productModel.updateProductModel(['Name', 1]);
+
+    expect(result).to.equal(1);
+  });
+
+  it('Teste que deleta um produto', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+
+    const result = await productModel.deleteProductModel(1);
+
+    expect(result).to.equal(1);
+  });
+
   afterEach(sinon.restore);
 });

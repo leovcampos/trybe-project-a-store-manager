@@ -21,18 +21,26 @@ const insertProductModel = async (productName) => {
   return newProduct;
 };
 
-const updateProductModel = async (id, name) => conn.execute(
-  `UPDATE StoreManager.products
+const updateProductModel = async (id, name) => {
+  const [{ affectedRows }] = await conn.execute(
+    `UPDATE StoreManager.products
   SET name = ?
   WHERE id = ?;`,
     [name, id],
-);
+  );
 
-const deleteProductModel = async (id) => conn.execute(
-  `DELETE FROM StoreManager.products
+  return affectedRows;
+};
+
+const deleteProductModel = async (id) => {
+  const [{ affectedRows }] = await conn.execute(
+    `DELETE FROM StoreManager.products
   WHERE id = ?;`,
-  [id],
-);
+    [id],
+  );
+
+  return affectedRows;
+}; 
 
 module.exports = {
   findAllModel,

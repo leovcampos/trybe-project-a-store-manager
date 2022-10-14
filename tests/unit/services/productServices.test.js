@@ -39,5 +39,41 @@ describe('Testes unitários para a pasta services', function () {
 
   });
 
+  it('Teste se o produto é atualizado', async function () {
+    sinon.stub(connection, 'execute')
+      .onFirstCall().resolves([[productId]])
+      .onSecondCall().resolves([{ affectedRows: 1 }]);
+    
+    sinon.stub(productServices, 'findByIdService').resolves(productId);
+    sinon.stub(productModel, 'updateProductModel').resolves(1);
+
+    const result = await productServices.updateProductService(1, 'Teia do Aranha');
+
+    expect(result).to.deep.equal({
+      statusCode: 200,
+      message: {
+        id: 1,
+        name: 'Teia do Aranha'
+      }
+    })
+  });
+
+  it('Teste se o produto é excluído', async function () {
+    sinon.stub(connection, 'execute')
+      .onFirstCall().resolves([[productId]])
+      .onSecondCall().resolves([{ affectedRows: 1 }]);
+
+    sinon.stub(productModel, 'deleteProductModel').resolves(1);
+
+    const result = await productServices.deleteProductService(1);
+
+    expect(result).to.deep.equal({
+      statusCode: 204,
+      message: {
+        deletedProduct: productId,
+      },
+    })
+  });
+
   afterEach(sinon.restore);
 });
