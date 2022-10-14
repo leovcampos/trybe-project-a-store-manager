@@ -22,5 +22,22 @@ describe('Testes unitários para a pasta services', function () {
     const returnIdProduct = await productServices.findByIdService(1)
 
     expect(returnIdProduct).to.deep.equal(productId);
-  })
+  });
+
+  it('Teste se um novo produto é adicionado', async function () {
+    const output = {
+      id: 4,
+      name: 'Novo produto',
+    };
+
+    sinon.stub(connection, 'execute').resolves([{ insertId: 4 }]);
+    sinon.stub(productModel, 'insertProductModel').resolves(output);
+
+    const insertTest = await productServices.insertProductService('Novo produto');
+
+    expect(insertTest).to.deep.equal(output);
+
+  });
+
+  afterEach(sinon.restore);
 });

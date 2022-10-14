@@ -40,5 +40,20 @@ describe('Testes unitários da pasta models', function () {
     expect(result).to.deep.equal(output);
   })
 
+  it('Teste se insere um novo produto', async function () {
+    const output = {
+      id: 5,
+      name: 'Novo produto',
+    };
+
+    sinon.stub(connection, 'execute')
+      .onFirstCall().resolves([{ insertId: 5 }])
+      .onSecondCall().resolves([[output]])
+    sinon.stub(productModel, 'findByIdModel').resolves([[output]]);
+
+    const result = await productModel.insertProductModel('Novo produto');
+    expect(result).to.deep.equal(output);
+  });
+
   afterEach(sinon.restore);
 });

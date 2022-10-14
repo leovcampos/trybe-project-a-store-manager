@@ -50,5 +50,23 @@ describe('Testes unitários da pasta controllers', function () {
 
   });
 
+  it('Teste se um novo produto é adicionado', async function () {
+    const res = {};
+    const req = {
+      body: {
+        name: 'Martelo do Thor',
+      }
+    };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon.stub(productServices, 'insertProductService').resolves(productId);
+
+    await productControllers.insertProductController(req, res);
+
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith(productId);
+  });
+
   afterEach(sinon.restore);
 });
