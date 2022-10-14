@@ -28,9 +28,14 @@ const updateProductModel = async (id, name) => conn.execute(
     [name, id],
 );
 
+// const deleteProductModel = async (id) => conn.execute(
+
+// );
+
 module.exports = {
   findAllModel,
   findByIdModel,
   insertProductModel,
   updateProductModel,
+  // deleteProductModel,
 };

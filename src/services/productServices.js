@@ -7,7 +7,7 @@ const findAllService = async () => {
 
 const findByIdService = async (id) => {
   const [[result]] = await productsModel.findByIdModel(id);
-  return result;
+  return result || false;
 };
 
 const insertProductService = async (productName) => {
@@ -16,8 +16,7 @@ const insertProductService = async (productName) => {
 };
 
 const updateProductService = async (id, name) => {
-  const product = productsModel.findByIdModel(id);
-
+  const product = await findByIdService(id);
   if (!product) {
     return {
       statusCode: 404,
