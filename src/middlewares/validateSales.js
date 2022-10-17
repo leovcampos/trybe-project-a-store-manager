@@ -38,7 +38,7 @@ const validateSales = (req, res, next) => {
 
   if (validateQuantity(saleProducts)) {
     const { statusCode, message } = validateQuantity(saleProducts);
-    return res.status(statusCode).json(message);
+    return res.status(statusCode).json({ message });
   }
 
   next();
