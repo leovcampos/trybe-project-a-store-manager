@@ -13,7 +13,16 @@ const findByIdSaleController = async (req, res) => {
   res.status(statusCode).json(message);
 };
 
+const addSaleController = async (req, res) => {
+  const saleProduct = req.body;
+
+  const { statusCOde, message } = await saleServices.addSaleService(saleProduct);
+
+  res.status(statusCOde).jason(message);
+};
+
 module.exports = {
   findAllSalesController,
   findByIdSaleController,
+  addSaleController,
 };
