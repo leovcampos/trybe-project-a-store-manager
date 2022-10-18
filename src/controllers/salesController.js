@@ -22,7 +22,7 @@ const addSaleController = async (req, res) => {
 };
 
 const deleteSaleController = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
 
   const { statusCode, message } = await saleServices.deleteSaleService(id);
 

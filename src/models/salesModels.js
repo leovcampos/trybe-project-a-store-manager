@@ -71,7 +71,7 @@ const insertSaleModel = async (product) => {
 };
 
 const deleteSaleModel = async (id) => {
-  const result = await conn.execute(
+  const [{ affectedRows }] = await conn.execute(
     `
       DELETE FROM
         StoreManager.sales
@@ -81,7 +81,7 @@ const deleteSaleModel = async (id) => {
     [id],
   );
 
-  return result;
+  return affectedRows;
 };
 
 module.exports = {

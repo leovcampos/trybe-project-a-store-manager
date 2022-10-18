@@ -83,9 +83,7 @@ const addSaleService = async (saleProducts) => {
 const deleteSaleService = async (id) => {
   const validateId = await findByIdSaleService(id);
 
-  if (validateId.statusCode === 404) {
-    return validateId;
-  }
+  if (validateId.statusCode === 404) return validateId;
 
   await saleModels.deleteSaleModel(id);
 
