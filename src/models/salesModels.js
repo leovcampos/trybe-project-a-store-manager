@@ -15,7 +15,7 @@ const findAllSalesModel = async () => {
   INNER JOIN
     StoreManager.sales sale
   ON
-    sale.id = salelProduct.sale_id
+    sale.id = saleProduct.sale_id
   ORDER BY
     saleProduct.sale_id;
   `,
