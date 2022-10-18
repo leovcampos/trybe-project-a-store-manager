@@ -12,6 +12,7 @@ const validateIdProduct = (products) => {
 
 const validateQuantity = (product) => {
   const productQuantity = product.every(({ quantity }) => quantity !== undefined);
+  const validateNumberQuantity = product.every(({ quantity }) => Number(quantity) > 0);
 
   if (!productQuantity) {
     return {
@@ -19,8 +20,7 @@ const validateQuantity = (product) => {
       message: '"quantity" is required',
     };
   }
-
-  const validateNumberQuantity = product.every(({ quantity }) => Number(quantity) > 0);
+ 
   if (!validateNumberQuantity) {
     return {
       statusCode: 422,
@@ -40,7 +40,7 @@ const validateSales = (req, res, next) => {
 
   if (validateQuantity(saleProducts)) {
     const { statusCode, message } = validateQuantity(saleProducts);
-    return res.status(statusCode).json(message);
+    return res.status(statusCode).json({ message });
   }
 
   next();
