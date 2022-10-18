@@ -70,9 +70,24 @@ const insertSaleModel = async (product) => {
   );
 };
 
+const deleteSaleModel = async (id) => {
+  const result = await conn.execute(
+    `
+      DELETE FROM
+        StoreManager.sales
+      WHERE
+        id = ?
+    `,
+    [id],
+  );
+
+  return result;
+};
+
 module.exports = {
   findAllSalesModel,
   findByIdSaleModel,
   insertSaleModel,
   insertNewSaleModel,
+  deleteSaleModel,
 };
