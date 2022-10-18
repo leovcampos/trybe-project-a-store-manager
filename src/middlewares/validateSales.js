@@ -1,11 +1,13 @@
-const validateIdProduct = (product) => {
-  const productIds = product.every(({ productId = 0 }) => productId);
+const validateIdProduct = (products) => {
+  const productIds = products.every(({ productId = 0 }) => productId);
 
   if (!productIds) {
     return {
       message: '"productId" is required',
     };
   }
+
+  return false;
 };
 
 const validateQuantity = (product) => {
@@ -38,7 +40,7 @@ const validateSales = (req, res, next) => {
 
   if (validateQuantity(saleProducts)) {
     const { statusCode, message } = validateQuantity(saleProducts);
-    return res.status(statusCode).json({ message });
+    return res.status(statusCode).json(message);
   }
 
   next();

@@ -6,18 +6,18 @@ const findAllSalesModel = async () => {
   const [result] = await conn.execute(
     `
   SELECT
-    salesProducts.sale_id AS saleId,
-    sales.date,
-    product_is AS productId,
-    sales.quantity
+    saleProduct.sale_id AS saleId,
+    sale.date,
+    saleProduct.product_id AS productId,
+    saleProduct.quantity
   FROM
-    StoreManager.sales_products salesProducts
+    StoreManager.sales_products saleProduct
   INNER JOIN
-    StoreManager.sales sales
+    StoreManager.sales sale
   ON
-    sales.id = salesProducts.sale_id
+    sale.id = salelProduct.sale_id
   ORDER BY
-    salesProduct.sale_id;
+    saleProduct.sale_id;
   `,
   );
 
@@ -28,17 +28,17 @@ const findByIdSaleModel = async (id) => {
   const [result] = await conn.execute(
     `
     SELECT
-      sale.date,
-      saleProduct.product_id AS productId,
-      saleProduct.quantity,
-    FROM StoreManager.sales_products saleProduct
-    INNER JOIN StoreManager.sales sale
-    ON
-      saleProduct.sale_id = sale.id
-    WHERE
-      saleProduct.sale_id = ?
-    ORDER BY
-      saleProduct.sale_id;
+    sale.date,
+    saleProduct.product_id AS productId,
+    saleProduct.quantity
+  FROM StoreManager.sales_products saleProduct
+  INNER JOIN StoreManager.sales sale
+  ON
+    sale.id = saleProduct.sale_id
+  WHERE
+    saleProduct.sale_id = ?
+  ORDER BY
+    saleProduct.sale_id;
     `,
     [id],
   );
