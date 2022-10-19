@@ -93,9 +93,40 @@ const deleteSaleService = async (id) => {
   };
 };
 
+const updateProducts = async (saleId, saleProduct) => {
+  const productObj = productsObj(saleId, saleProduct);
+
+  await Promise.all(
+    productObj.map(async (sale) => saleModels.updateSaleModel(sale)),
+  );
+};
+
+const updateSaleService = async (saleId, saleProducts) => {
+  const validateSaleId = await findByIdSaleService(saleId);
+  const validateId = await checkProductId(saleProducts);
+  const { message } = await findByIdSaleService(saleId);
+
+  if (validateSaleId.statusCode === 404) return validateSaleId;
+
+  if (!validateId) {
+    return {
+      statusCode: 404,
+      message: {
+        saleId,
+        itemsUpdated: 'Product not found',
+      },
+    };
+  }
+
+  await updateProducts(saleId, saleProducts);
+  return { statusCode: 200, message: { saleId, itemsUpdated: mapSale(message) },
+  };
+};
+
 module.exports = {
   findAllSaleService,
   findByIdSaleService,
   addSaleService,
   deleteSaleService,
+  updateSaleService,
 };
