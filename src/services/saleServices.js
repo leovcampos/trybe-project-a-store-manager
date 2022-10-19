@@ -96,12 +96,9 @@ const deleteSaleService = async (id) => {
 const updateProducts = async (saleId, saleProduct) => {
   const productObj = productsObj(saleId, saleProduct);
 
-  const resultPromise = await Promise.all(
+  await Promise.all(
     productObj.map(async (sale) => saleModels.updateSaleModel(sale)),
   );
-
-  console.log(resultPromise);
-  return resultPromise;
 };
 
 const updateSaleService = async (saleId, saleProducts) => {
