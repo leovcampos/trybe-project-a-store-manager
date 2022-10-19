@@ -96,31 +96,27 @@ const deleteSaleService = async (id) => {
 const updateProducts = async (saleId, saleProduct) => {
   const productObj = productsObj(saleId, saleProduct);
 
-  await Promise.all(
+  const resultPromise = await Promise.all(
     productObj.map(async (sale) => saleModels.updateSaleModel(sale)),
   );
+
+  console.log(resultPromise);
+  return resultPromise;
 };
 
 const updateSaleService = async (saleId, saleProducts) => {
   const validateSaleId = await findByIdSaleService(saleId);
-  const validateId = await checkProductId(saleProducts);
-  const { message } = await findByIdSaleService(saleId);
-
+  
   if (validateSaleId.statusCode === 404) return validateSaleId;
-
+  
+  const validateId = await checkProductId(saleProducts);
   if (!validateId) {
-    return {
-      statusCode: 404,
-      message: {
-        saleId,
-        itemsUpdated: 'Product not found',
-      },
-    };
+    return { statusCode: 404, message: { message: 'Product not found' } };
   }
 
   await updateProducts(saleId, saleProducts);
-  return { statusCode: 200, message: { saleId, itemsUpdated: mapSale(message) },
-  };
+
+  return { statusCode: 200, message: { saleId, itemsUpdated: saleProducts } };
 };
 
 module.exports = {
